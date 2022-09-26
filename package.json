@@ -2,7 +2,16 @@
   "name": "twt-ranking",
   "version": "0.0.3",
   "module": "src/index.js",
+  "type": "module",
   "devDependencies": {
     "bun-types": "latest"
+  },
+  "scripts": {
+    "index": "swc ./src/index.ts -o ./src/index.js && node ./src/index.js"
+  },
+  "dependencies": {
+    "@types/pg": "^8.6.5",
+    "dotenv": "^16.0.2",
+    "pg": "^8.8.0"
   }
 }
