@@ -1,13 +1,7 @@
-## Getting Started
+## Tech With Tim Discord Community Weekly Challenge Ranking System
 
-### Cloning the repo
+### Run
+Use your favourite JS tool to build/run index.ts
 
-```sh
-bun create blank ./NAME_HERE
-```
-
-### Execute a file (eg. src/index.js)
-    
-```sh
-bun run ./src/index.js
-```
+### Configuration
+Rename `.env.example` to `.env` and use your actual DB credentials.
