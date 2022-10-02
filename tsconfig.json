@@ -7,9 +7,5 @@
     "target": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    // "bun-types" is the important part
-    "types": [
-      "bun-types"
-    ]
   }
 }

@@ -35,8 +35,8 @@ const client = await connectDb();
 
 const idRegex = /<@!?(\d+)>/g;
 
-const shortestFile = "s124.txt";
-const fastestFile = "f124.txt";
+const shortestFile = "s125.txt";
+const fastestFile = "f125.txt";
 
 const shortestContent = (await fs.readFile(shortestFile)).toString();
 const fastestContent = (await fs.readFile(fastestFile)).toString();
