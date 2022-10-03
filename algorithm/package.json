@@ -7,11 +7,13 @@
     "bun-types": "latest"
   },
   "scripts": {
-    "index": "swc ./src/index.ts -o ./src/index.js && node ./src/index.js"
+    "index": "swc ./src/index.ts -o ./src/index.js && node ./src/index.js",
+    "data": "swc ./src/data.ts -o ./src/data.js && node ./src/data.js"
   },
   "dependencies": {
     "@types/pg": "^8.6.5",
     "dotenv": "^16.0.2",
+    "node-fetch": "^3.2.10",
     "pg": "^8.8.0"
   }
 }

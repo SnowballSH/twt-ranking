@@ -1,6 +1,7 @@
-node_modules/
-.env
-src/*.js
-src/*.js.map
-bun.lockb
-*.txt
+**/node_modules/
+**/.env
+**/src/*.js
+**/src/*.js.map
+**/bun.lockb
+**/*.txt
+**/*.DS_Store
