@@ -35,8 +35,8 @@ const client = await connectDb();
 
 const idRegex = /<@!?(\d+)>/g;
 
-const shortestFile = "s125.txt";
-const fastestFile = "f125.txt";
+const shortestFile = "s126.txt";
+const fastestFile = "f126.txt";
 
 const shortestContent = (await fs.readFile(shortestFile)).toString();
 const fastestContent = (await fs.readFile(fastestFile)).toString();
@@ -119,9 +119,8 @@ async function updateRatings() {
 
     const eloChange = Math.round(
       (diff >= 0 ? -1300 / (diff + 13) + 100 : 1300 / (10 - diff) - 130) +
-        (expectedRank.length * 2) / 3 +
-        6 +
-        Math.random() * 3
+        expectedRank.length / 2 +
+        2
     );
     const newElo = expectedRank[i].rating + eloChange;
 
