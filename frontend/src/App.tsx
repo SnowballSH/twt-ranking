@@ -40,7 +40,10 @@ export default function App() {
         <Space w="md"></Space>
         {user.username + " #" + user.discriminator}
       </td>
-      <td>{user.rating}</td>
+      <td>
+        {user.rating}
+        {user.count >= 3 ? "" : "?"}
+      </td>
       <td>{user.count}</td>
     </tr>
   ));
@@ -69,7 +72,7 @@ export default function App() {
               <tr>
                 <th>Rank</th>
                 <th>Username</th>
-                <th>Rating</th>
+                <th>Rating (? = provisional)</th>
                 <th># Solved</th>
               </tr>
             </thead>
