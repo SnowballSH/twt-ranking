@@ -62,7 +62,7 @@ async function updateRatings() {
   for (let id of shortestContent.matchAll(idRegex)) {
     actualRank.push({
       id: id[1],
-      shortest: i <= 1 ? i++ - 1 : i++,
+      shortest: i <= 2 ? i++ - 1 : i++,
       rank: 0,
       rating: 0,
     });
@@ -82,7 +82,7 @@ async function updateRatings() {
   i = 0;
   for (let id of fastestContent.matchAll(idRegex)) {
     const obj = actualRank.find((user) => user.id === id[1]);
-    obj.rating = (obj.shortest + (i <= 1 ? i++ - 1 : i++)) / 2;
+    obj.rating = (obj.shortest + (i <= 2 ? i++ - 1 : i++)) / 2;
   }
 
   expectedRank.sort((a, b) => b.rating - a.rating);
