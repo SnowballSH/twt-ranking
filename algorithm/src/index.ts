@@ -35,8 +35,9 @@ const client = await connectDb();
 
 const idRegex = /<@!?(\d+)>/g;
 
-const shortestFile = "s126.txt";
-const fastestFile = "f126.txt";
+const shortestFile = "s127.txt";
+const fastestFile = "f127.txt";
+const difficulty = 5;
 
 const shortestContent = (await fs.readFile(shortestFile)).toString();
 const fastestContent = (await fs.readFile(fastestFile)).toString();
@@ -61,7 +62,7 @@ async function updateRatings() {
   for (let id of shortestContent.matchAll(idRegex)) {
     actualRank.push({
       id: id[1],
-      shortest: i++,
+      shortest: i <= 1 ? i++ - 1 : i++,
       rank: 0,
       rating: 0,
     });
@@ -81,7 +82,7 @@ async function updateRatings() {
   i = 0;
   for (let id of fastestContent.matchAll(idRegex)) {
     const obj = actualRank.find((user) => user.id === id[1]);
-    obj.rating = (obj.shortest + i++) / 2;
+    obj.rating = (obj.shortest + (i <= 1 ? i++ - 1 : i++)) / 2;
   }
 
   expectedRank.sort((a, b) => b.rating - a.rating);
@@ -120,7 +121,7 @@ async function updateRatings() {
     const eloChange = Math.round(
       (diff >= 0 ? -1300 / (diff + 13) + 100 : 1300 / (10 - diff) - 130) +
         expectedRank.length / 2 +
-        2
+        2 * difficulty
     );
     const newElo = expectedRank[i].rating + eloChange;
 
