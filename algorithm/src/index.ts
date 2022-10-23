@@ -35,9 +35,9 @@ const client = await connectDb();
 
 const idRegex = /<@!?(\d+)>/g;
 
-const shortestFile = "s127.txt";
-const fastestFile = "f127.txt";
-const difficulty = 5;
+const shortestFile = "s128.txt";
+const fastestFile = "f128.txt";
+const difficulty = 2;
 
 const shortestContent = (await fs.readFile(shortestFile)).toString();
 const fastestContent = (await fs.readFile(fastestFile)).toString();
@@ -119,9 +119,7 @@ async function updateRatings() {
     const diff = expectedRanking - actualRanking;
 
     const eloChange = Math.round(
-      (diff >= 0 ? -1300 / (diff + 13) + 100 : 1300 / (10 - diff) - 130) +
-        expectedRank.length / 2 +
-        2 * difficulty
+      Math.min(40, (2 * 64) / (8 - diff)) + 2 * difficulty
     );
     const newElo = expectedRank[i].rating + eloChange;
 
@@ -166,9 +164,15 @@ async function updateRatings() {
 
   const answer = await rl.question("Update elo? (y/n) ");
   if (answer === "y") {
+    const DIFFICULTY_REDUCTION = [50, 35, 25, 20, 16, 11, 6, 3, 1, 0, 0];
+    // - for every user based on difficulty
+    await client.query(
+      `UPDATE users SET rating = GREATEST(500, rating - ${DIFFICULTY_REDUCTION[difficulty]})`
+    );
+
     for (const user of newElos) {
       await client.query(
-        `UPDATE users SET rating = ${user.elo}, count = count + 1 WHERE discord_id = '${user.id}'`
+        `UPDATE users SET rating = ${user.elo} + ${DIFFICULTY_REDUCTION[difficulty]}, count = count + 1 WHERE discord_id = '${user.id}'`
       );
     }
     console.log("ELO Updated.");
