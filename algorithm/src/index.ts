@@ -164,7 +164,7 @@ async function updateRatings() {
 
   const answer = await rl.question("Update elo? (y/n) ");
   if (answer === "y") {
-    const DIFFICULTY_REDUCTION = [50, 35, 25, 20, 16, 11, 6, 3, 1, 0, 0];
+    const DIFFICULTY_REDUCTION = [30, 25, 15, 10, 6, 4, 3, 2, 1, 0, 0];
     // - for every user based on difficulty
     await client.query(
       `UPDATE users SET rating = GREATEST(500, rating - ${DIFFICULTY_REDUCTION[difficulty]})`
