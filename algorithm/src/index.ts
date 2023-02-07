@@ -37,7 +37,7 @@ const idRegex = /<@!?(\d+)>/g;
 
 const shortestFile = "short.txt";
 const fastestFile = "fast.txt";
-const difficulty = 6;
+const difficulty = 3;
 
 const shortestContent = (await fs.readFile(shortestFile)).toString();
 const fastestContent = (await fs.readFile(fastestFile)).toString();
