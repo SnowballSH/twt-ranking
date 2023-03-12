@@ -39,7 +39,10 @@ const fetchUser = async (id: string): Promise<any> => {
       },
     }
   );
-  if (!response.ok) throw new Error(`Error status code: ${response.status}`);
+  if (!response.ok) {
+    console.log(`Error status code: ${response.status}`);
+    return false;
+  }
   return await response.json();
 };
 
@@ -48,6 +51,9 @@ async function getUsers() {
   users.rows.sort((a, b) => b.rating - a.rating);
   for (const user of users.rows) {
     const discordUser = await fetchUser(user.discord_id);
+    if (!discordUser) {
+      continue;
+    }
     user.username = discordUser.username;
     user.discriminator = discordUser.discriminator;
     user.avatar = discordUser.avatar;
