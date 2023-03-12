@@ -49,15 +49,18 @@ const fetchUser = async (id: string): Promise<any> => {
 async function getUsers() {
   const users = await client.query("SELECT * FROM users");
   users.rows.sort((a, b) => b.rating - a.rating);
+  const invalid = new Set();
   for (const user of users.rows) {
     const discordUser = await fetchUser(user.discord_id);
     if (!discordUser) {
+      invalid.add(user.discord_id);
       continue;
     }
     user.username = discordUser.username;
     user.discriminator = discordUser.discriminator;
     user.avatar = discordUser.avatar;
   }
+  users.rows = users.rows.filter((user) => !invalid.has(user.discord_id));
   // console.log(users.rows);
   await fs.writeFile(
     "../frontend/src/assets/users.json",
